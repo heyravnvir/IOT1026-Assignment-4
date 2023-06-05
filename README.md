@@ -12,6 +12,7 @@
 </p>
 
 # IOT1026-Assignment-4
+This is a program that .. 
 Write a description of the project here and don't forget to update the badges.  
 
 [Assignment Instructions](docs/instructions.md)  
