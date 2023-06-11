@@ -1,53 +1,39 @@
 using Assignment.InterfaceCommand;
+
 namespace Assignment;
+
 static class RobotTester
 {
     public static void TestRobot()
     {
         int totalCommands = 1;
         Robot robot = new Robot();
-        Console.WriteLine("Choose from the following commands :\nON\nOFF\nNORTH\nSOUTH\nEAST\nWEST\nREBOOT\n");
-        
-        while (totalCommands <= 6){
-
-            Console.Write($"Enter Commands | #{totalCommands}: ");
+        Console.WriteLine("Choose 6 Commands : \nON\nOFF\nNORTH\nSOUTH\nEAST\nSOUTH\nWEST\nREBOOT\n");
+        do{
+            Console.Write($"Enter Command | #{totalCommands}: ");
             string? choice = Console.ReadLine()?.ToUpper();
-
-            if(choice == "ON"){
-                new OnCommand();
-            }
-            else if(choice == "OFF"){
-                new OffCommand();
-            }
-            else if(choice == "NORTH"){
-                new NorthCommand();
-            }
-            else if(choice == "SOUTH"){
-                new SouthCommand();
-            }
-            else if(choice == "EAST"){
-                new EastCommand();
-            }
-            else if(choice == "WEST"){
-                new WestCommand();
-            }
-            else if(choice == "REBOOT"){
-                new RebootCommand();
-            }
-
-            if (choice != null){
-                robot.LoadCommand(choice);
+            RobotCommand? command = choice switch{
+                "ON" => new OnCommand(),
+                "OFF" => new OffCommand(),
+                "NORTH" => new NorthCommand(),
+                "SOUTH" => new SouthCommand(),
+                "EAST" => new EastCommand(),
+                "WEST" => new WestCommand(),
+                "REBOOT" => new RebootCommand(),
+                _ => null
+            };
+            if (command!=null){
+                robot.LoadCommand(command);
                 totalCommands++;
             }
-            else
-            {
-                Console.ForegroundColor=ConsoleColor.Red;
-                Console.WriteLine("Not a valid Command ! ");
+            else{
+                Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Not a valid Command !!!");
                 Console.ResetColor();
             }
-
-            robot.Run();
-
-        }
+        } while (totalCommands <= 6);
+        Console.WriteLine();
+        robot.Run();
+        Console.ReadLine();
     }
 }
