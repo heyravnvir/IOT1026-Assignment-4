@@ -5,9 +5,7 @@
         static void Main()
         {
             // Run your RobotTester class here -> RobotTester.TestRobot()
-            RobotTester test = new RobotTester();
-
-            test.TestRobot();
+            RobotTester.TestRobot();
         }
     }
 }

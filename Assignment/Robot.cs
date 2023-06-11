@@ -1,69 +1,61 @@
 ﻿// Change to 'using Assignment.InterfaceCommand' when you are ready to test your interface implementation
-using Assignment.AbstractCommand;
+using Assignment.InterfaceCommand;
 
 namespace Assignment;
 
-class Robot
+public class Robot
 {
-    // These are properties, you can replace these with traditional getters/setters if you prefer.
     public int NumCommands { get; }
     public int X { get; set; }
     public int Y { get; set; }
     public bool IsPowered { get; set; }
 
     private const int DefaultCommands = 6;
-    // An array is not the preferred data structure here.
-    // You will get bonus marks if you replace the array with the preferred data structure
-    // Hint: It is NOT a list either,
-    private readonly RobotCommand[] _commands;
+    // i am using Queue data type to store commands 
+    private readonly Queue<RobotCommand> _commands;
     private int _commandsLoaded = 0;
 
+    /// This function will return robot's current state 
+    // its cordinates and its power status 
     public override string ToString()
     {
         return $"[{X} {Y} {IsPowered}]";
     }
 
-    // You should not have to use any of the methods below here but you should
-    // provide XML documentation for the argumented constructor, the Run method and one
-    // of the LoadCommand methods.
     public Robot() : this(DefaultCommands) { }
 
-    /// <summary>
-    /// Constructor that initializes the robot with the capacity to store a user specified
-    /// number of commands
-    /// </summary>
-    /// <param name="numCommands">The maximum number of commands the robot can store</param>
+
+
+    // this constructor will declare the que in robot object so that it can store commands
     public Robot(int numCommands)
     {
-        _commands = new RobotCommand[numCommands];
+        _commands = new Queue<RobotCommand>(numCommands);
         NumCommands = numCommands;
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <throws> </throws>
-    public void Run()
+   // this function is responsible for executing the commands present in robot's que
+   // this will return true if the command is executed correctly and false if not
+    public bool Run()
     {
-        // Is this throw a good design choice? Can you think of any alternatives?
-        if (!_commands.Any()) throw new InvalidOperationException("No commands have been loaded!");
-        foreach (var command in _commands)
-        {
-            command.Run(this);
-            Console.WriteLine(this);
+        if (_commands.Count <= 0){
+        return false;}
+        while (_commands.Count >=1){
+            var c = _commands.Dequeue();
+            c.Run(this);
+        Console.WriteLine(this);
         }
+        return true;
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="command"></param>
-    /// <returns></returns>
     public bool LoadCommand(RobotCommand command)
     {
-        if (_commandsLoaded >= NumCommands)
-            return false;
-        _commands[_commandsLoaded++] = command;
+        if (_commandsLoaded  >= NumCommands){
+        return false;
+        }
+        else{
+        _commands.Enqueue(command);
+        _commandsLoaded+=1;
         return true;
+        }
     }
 }
