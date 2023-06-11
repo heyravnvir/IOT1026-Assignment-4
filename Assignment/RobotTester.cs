@@ -49,3 +49,5 @@ static class RobotTester
             robot.Run();
 
         }
+    }
+}
