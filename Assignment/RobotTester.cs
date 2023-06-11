@@ -35,8 +35,8 @@ static class RobotTester
                 new RebootCommand();
             }
 
-            if (command != null){
-                robot.LoadCommand(command);
+            if (choice != null){
+                robot.LoadCommand(choice);
                 totalCommands++;
             }
             else
