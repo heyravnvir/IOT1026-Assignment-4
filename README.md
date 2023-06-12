@@ -1,3 +1,4 @@
+![new](https://github.com/heyravnvir/IOT1026-Assignment-4/assets/124471296/83b5d1a0-6427-41b5-bc65-c9d011cd30fd)
 <p align="center">
 	<a href="https://github.com/heyravnvir/IOT1026-Assignment-4/actions/workflows/ci.yml">
     <img src="https://github.com/heyravnvir/IOT1026-Assignment-4/actions/workflows/ci.yml/badge.svg"/>
